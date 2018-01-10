@@ -35,6 +35,7 @@ import java.util.Date;
 public abstract class Event {
 
     protected String name;
+    protected Object value;
     protected long timestamp;
 
     protected Event() {
@@ -47,7 +48,16 @@ public abstract class Event {
         timestamp = System.currentTimeMillis();
     }
 
+    protected Event(final String name, final Object value) {
+    	this(name);
+        this.value = value;
+    }
+
     public String getName() {
+        return name;
+    }
+
+    public Object getValue() {
         return name;
     }
 
@@ -59,10 +69,10 @@ public abstract class Event {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Event");
-        sb.append("{name='").append(name).append('\'');
+        sb.append("{name='").append(name);
+        sb.append(", value='").append(value).append('\'');
         sb.append(", timestamp=").append(new Date(timestamp));
         sb.append('}');
         return sb.toString();
     }
-
 }
